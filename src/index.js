@@ -1,5 +1,6 @@
 const axios = require('axios')
 const missionManager = require('./missionManager.js')
+const {parseObjToPostParam} = require("./util/postParamUtil")
 
 /**
  * 发送请求
@@ -19,7 +20,7 @@ function betterAjax(config) {
     if (method === 'GET') {
         axiosConfig.params = config.param
     } else {
-        axiosConfig.data = config.param
+        axiosConfig.data = parseObjToPostParam(config.param)
     }
 
     return axios(

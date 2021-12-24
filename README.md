@@ -1,13 +1,20 @@
 # betterAjax
 基于axios进行二次封装，用于快速发送ajax请求，并提供多种防抖方案，方便快速开发。
 
-[English Docs](./README-en.md)
+[Github](https://github.com/HuPeng333/axios-simple-wrapper)
+
+[English Docs](https://github.com/HuPeng333/axios-simple-wrapper/blob/master/README-en.md)
 
 ## 快速开始
+安装
+```shell
+npm i axios-simple-wrapper --save
+```
+
 内置3个常用方法, 其中有2个比较小巧的方法和一个比较原始的方法(即默认导出的方法)
 ### 默认导出方法
 ```js
-import betterAjax from "better-ajax"
+import betterAjax from "axios-simple-wrapper"
 
 betterAjax({
   url: 'http://localhost:8080',
@@ -39,7 +46,7 @@ betterAjax({
 
 当一个请求被拒绝时, 它会抛出一个错误, 你可以这样来自定义抛出的错误信息:
 ```js
-import betterAjax from 'better-ajax'
+import betterAjax from 'axios-simple-wrapper'
 
 betterAjax.rejectMessage = 'your message'
 // 在内部, 会使用 thorw new Error(betterAjax.rejectMessage) 来抛出异常
@@ -67,7 +74,7 @@ function betterAjax() {
 ### 额外方法
 为了方便快速开发，我们还提供了另外两种简单的方法
 ```js
-import { noRepeatAjax, cancelOldAjax} from "better-ajax"
+import { noRepeatAjax, cancelOldAjax } from "axios-simple-wrapper"
 
 // 使用REJECT_IF_EXIST策略快速创建请求
 noRepeatAjax('http://localhost:8080', {name: 'abc'})
@@ -87,7 +94,7 @@ cancelOldAjax('http://localhost:8080', {name: 'abc'}, 'POST')
 
 ```js
 // ------------ √ ------------
-import { axios } from 'better-ajax'
+import { axios } from 'axios-simple-wrapper'
 
 axios.defaults.baseURL = 'http://localhost:8080'
 // ------------ √ ------------

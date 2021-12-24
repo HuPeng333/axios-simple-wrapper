@@ -3,14 +3,20 @@
 based on the 'axios', using to send ajax quickly, 
 and provided multiply plans to prevent the same requests been sent in a time
 
-[Chinese Docs](./README.md)
+[Github](https://github.com/HuPeng333/axios-simple-wrapper)
+
+[Chinese Docs](https://github.com/HuPeng333/axios-simple-wrapper/blob/master/README.md)
 
 ## Quick Start
+install
+```shell
+npm i axios-simple-wrapper --save
+```
 It contains 3 mainly method, which include two simply method and a complex method
 
 ### Default export method
 ```js
-import betterAjax from "better-ajax"
+import betterAjax from "axios-simple-wrapper"
 
 betterAjax({
   url: 'http://localhost:8080',
@@ -39,7 +45,7 @@ betterAjax({
 
 when a request is been rejected, it will throw an Error, you can display the error message like this:
 ```js
-import betterAjax from 'better-ajax'
+import betterAjax from 'axios-simple-wrapper'
 
 betterAjax.rejectMessage = 'your message'
 // when a request is benn rejected, it will run 'thorw new Error(betterAjax.rejectMessage)'
@@ -67,7 +73,7 @@ function betterAjax() {
 for fast development, we provided two more simply function
 
 ```js
-import { noRepeatAjax, cancelOldAjax} from "better-ajax"
+import { noRepeatAjax, cancelOldAjax} from "axios-simple-wrapper"
 
 // use the 'REJECT_IF_EXIST' policy to create request
 noRepeatAjax('http://localhost:8080', {name: 'abc'})
@@ -87,7 +93,7 @@ cancelOldAjax('http://localhost:8080', {name: 'abc'}, 'POST')
 This dependence is totally based on the 'axios'! So the axios config is still can be used!
 ```js
 // ------------ √ ------------
-import { axios } from 'better-ajax'
+import { axios } from 'axios-simple-wrapper'
 
 axios.defaults.baseURL = 'http://localhost:8080'
 // ------------ √ ------------
