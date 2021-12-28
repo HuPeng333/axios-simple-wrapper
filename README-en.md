@@ -16,9 +16,9 @@ It contains 3 mainly method, which include two simply method and a complex metho
 
 ### Default export method
 ```js
-import betterAjax from "axios-simple-wrapper"
+import ajax from "axios-simple-wrapper"
 
-betterAjax({
+ajax({
   url: 'http://localhost:8080',
   method: 'GET',
   param: {name: 'abc'},
@@ -45,9 +45,9 @@ betterAjax({
 
 when a request is been rejected, it will throw an Error, you can display the error message like this:
 ```js
-import betterAjax from 'axios-simple-wrapper'
+import ajax from 'axios-simple-wrapper'
 
-betterAjax.rejectMessage = 'your message'
+ajax.rejectMessage = 'your message'
 // when a request is benn rejected, it will run 'thorw new Error(betterAjax.rejectMessage)'
 ```
 

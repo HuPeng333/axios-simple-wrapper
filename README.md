@@ -1,4 +1,4 @@
-# betterAjax
+# axios-simple-wrapper
 基于axios进行二次封装，用于快速发送ajax请求，并提供多种防抖方案，方便快速开发。
 
 [Github](https://github.com/HuPeng333/axios-simple-wrapper)
@@ -14,9 +14,9 @@ npm i axios-simple-wrapper --save
 内置3个常用方法, 其中有2个比较小巧的方法和一个比较原始的方法(即默认导出的方法)
 ### 默认导出方法
 ```js
-import betterAjax from "axios-simple-wrapper"
+import ajax from "axios-simple-wrapper"
 
-betterAjax({
+ajax({
   url: 'http://localhost:8080',
   method: 'GET',
   param: {name: 'abc'},
@@ -46,9 +46,9 @@ betterAjax({
 
 当一个请求被拒绝时, 它会抛出一个错误, 你可以这样来自定义抛出的错误信息:
 ```js
-import betterAjax from 'axios-simple-wrapper'
+import ajax from 'axios-simple-wrapper'
 
-betterAjax.rejectMessage = 'your message'
+ajax.rejectMessage = 'your message'
 // 在内部, 会使用 thorw new Error(betterAjax.rejectMessage) 来抛出异常
 ```
 

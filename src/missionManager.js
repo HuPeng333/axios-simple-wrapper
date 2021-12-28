@@ -7,15 +7,6 @@ const axios = require('axios')
 const manager = new Map()
 
 
-/**
- * 获取没有参数的url
- * @param url {string} url
- * @return {string} 去掉参数的url
- */
-function getNoParamUrl(url) {
-    return url.replace(/\?\S+/, '')
-}
-
 
 const missionManager = {
     /**
@@ -28,7 +19,6 @@ const missionManager = {
     addMission (url, policy, rejectMessage = 'the request is rejected because of the RejectPolicy') {
         const cancelTokenSource = axios.CancelToken.source()
 
-        const noParamUrl = getNoParamUrl(url)
         const task = manager.get(url)
 
         const token = cancelTokenSource.token
@@ -39,7 +29,7 @@ const missionManager = {
                 throw new Error(rejectMessage)
             }
         }
-        manager.set(noParamUrl,cancelTokenSource)
+        manager.set(url, cancelTokenSource)
         return token
     },
     /**
