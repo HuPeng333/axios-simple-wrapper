@@ -1,6 +1,8 @@
 import { AxiosPromise, AxiosRequestConfig, AxiosStatic, Method } from "axios";
-import { DebounceInterceptorConfig } from "./interceptor/debounce";
+import { DebounceInterceptorConfig, RejectPolicy as _RejectPolicy, RequestRejectError as _RequestRejectError } from "./interceptor/debounce";
 import { DefaultExportType } from "./types/defaults";
+export declare type RequestRejectError = _RequestRejectError;
+export declare type RejectPolicy = _RejectPolicy;
 /**
  * 设置防抖拦截器
  * @see RejectPolicy 三种防抖策略

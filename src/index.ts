@@ -32,8 +32,6 @@ export const noRepeatAjax:Ajax =
   <T> (p1: string | AxiosRequestConfig, p2?: Record<string, string>, p3?: Method):AxiosPromise<T> => {
   if (typeof p1 === 'string') {
     return betterAjax<T>({
-      // 不添加参数, 默认就是rejectIfExist
-      // url: appendParam(p1, 'rejectPolicy', 'rejectIfExist'),
       url: p1,
       method: p3,
       param: p2,
@@ -53,6 +51,7 @@ export const cancelOldAjax:Ajax =
         rejectPolicy: 'cancelOldTask'
       })
     } else {
+      // --
       p1.url = p1.url ? appendParam(p1.url, 'rejectPolicy', 'cancelOldAjax') : p1.url
       return axios(p1)
     }
