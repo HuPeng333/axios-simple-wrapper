@@ -1,0 +1,6 @@
+/test/
+/src/
+/node_modules/
+.idea/
+babel.config.js
+tsconfig.json

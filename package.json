@@ -1,0 +1,31 @@
+{
+  "name": "axios-simple-wrapper",
+  "version": "2.0.0",
+  "description": "provide various axios interceptors to help you to build your project",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "test": "jest"
+  },
+  "author": "IceOfSummer",
+  "license": "MIT",
+  "types": "./lib/index.d.ts",
+  "devDependencies": {
+    "@babel/cli": "^7.18.6",
+    "@babel/core": "^7.18.6",
+    "@babel/plugin-transform-modules-commonjs": "^7.18.6",
+    "@babel/preset-env": "^7.18.6",
+    "@babel/preset-typescript": "^7.18.6",
+    "@types/jest": "^28.1.4",
+    "axios": "^0.27.2",
+    "babel-jest": "^28.1.2",
+    "jest": "^28.1.2",
+    "typescript": "^4.7.4"
+  },
+  "repository": "https://github.com/IceOfSummer/axios-simple-wrapper",
+  "keywords": [
+    "axios",
+    "interceptors",
+    "debounce"
+  ]
+}
