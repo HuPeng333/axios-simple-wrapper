@@ -72,14 +72,13 @@ export interface DebounceInterceptorConfig {
   /**
    * 当出现错误时, 返回使用该构造器构造的实例
    */
-  rejectErrorClass: {new (...args: ConstructorParameters<typeof RequestRejectError>): RequestRejectError}
+  rejectErrorClass?: {new (...args: ConstructorParameters<typeof RequestRejectError>): RequestRejectError}
 }
 
 const defaultDebounceInterceptorConfig: DebounceInterceptorConfig = {
-  rejectErrorClass: RequestRejectError
 }
 
-export default function applyDebounceInterceptor(
+export default function(
   axios: AxiosStatic,
   interceptorConfig: DebounceInterceptorConfig = defaultDebounceInterceptorConfig
 ) {
@@ -101,7 +100,8 @@ export default function applyDebounceInterceptor(
         console.log(`find repeat request: ${config.url}`)
         return config
       } else {
-        return Promise.reject(new interceptorConfig.rejectErrorClass(config))
+        let cons = interceptorConfig.rejectErrorClass ? interceptorConfig.rejectErrorClass : RequestRejectError
+        return Promise.reject(new cons(config))
       }
     }
     return config

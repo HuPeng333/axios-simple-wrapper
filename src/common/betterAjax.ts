@@ -9,7 +9,7 @@ import requestParam from "../types/requestParam";
 type AjaxConfig = {
   url: string
   method?: Method
-  param?: any
+  param?: Record<string, string | number>
   rejectPolicy?: RejectPolicy
   axiosConfig?: AxiosRequestConfig
 }
@@ -36,9 +36,10 @@ const betterAjax = <T> (config: AjaxConfig):AxiosPromise<T> => {
     if (!axiosConfig.headers) {
       axiosConfig.headers = {}
     }
-    axiosConfig.headers['Content-Type'] = 'application/x-www-form-urlencoded'
+    axiosConfig.headers['content-type'] = 'application/x-www-form-urlencoded'
   }
   return axios(axiosConfig)
 }
+
 
 export default betterAjax
