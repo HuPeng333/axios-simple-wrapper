@@ -98,5 +98,36 @@ cancelOldAjax({
   method: 'DELETE'
 })
 ```
-在发送GET请求时,参数会自动添加到url上; 发送POST请求则添加到请求体上, 并且自动加上请求头`Content-Type`,
-值为: `application/x-www-form-urlencoded`
+在发送GET请求时,参数会自动添加到url上; 发送POST请求则添加到请求体上, `Content-Type`为`application/x-www-form-urlencoded`,
+
+#### 高级用法
+在**Typescript**下发送请求，一般需要声明返回值的类型，而axios请求的返回值是`AxiosPromise`, 其本质是`Promise<AxiosResponse>`, 
+返回类型默认被`AxiosResponse`包装, 其`data`属性就是响应体的数据：
+
+```typescript
+import axios, {AxiosResponse} from "axios";
+
+// 泛型指定响应体的类型为number
+axios.get<number>('url').then((response: AxiosResponse) => {
+  const responseBody = response.data
+  // true
+  console.log(responseBody === 'number')
+})
+```
+
+但有些时候，我们可能设置了一些拦截器或者过滤器，导致返回的结果并不是`AxiosResponse`对象，而且无法直接通过axios自带泛型来声明返回值的类型
+
+因此在上面两个方法中额外声明了一个泛型`Clean`, 将其设置为`true`, 返回值的类型将不会再被`AxiosResponse`包装:
+
+```typescript
+import axios from "axios";
+
+type Person = {/*...*/}
+
+// 类型为: AxiosPromise<Person> 也可以理解为 Promise<AxiosResponse<Person>>
+axios.get<Person>('url')
+
+// 类型为: Promise<Person>
+axios.get<Person, true>('url')
+
+```

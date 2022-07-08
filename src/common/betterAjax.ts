@@ -41,5 +41,10 @@ const betterAjax = <T> (config: AjaxConfig):AxiosPromise<T> => {
   return axios(axiosConfig)
 }
 
+export interface Ajax {
+  <T, Clean = undefined > (url: string, param?: Record<string, string | number>, method?: Method): AjaxResponseTypes<T, Clean>
+  <T, Clean = undefined> (axios: AxiosRequestConfig): AjaxResponseTypes<T, Clean>
+}
+export type AjaxResponseTypes<T, Clean> = true extends Clean ? Promise<T> : AxiosPromise<T>
 
 export default betterAjax

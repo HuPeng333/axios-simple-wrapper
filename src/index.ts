@@ -1,11 +1,11 @@
-import axios, {AxiosPromise, AxiosRequestConfig, AxiosStatic, Method} from "axios";
+import axios, {AxiosRequestConfig, AxiosStatic, Method} from "axios";
 import _applyDebounceInterceptor,{
   DebounceInterceptorConfig,
   RejectPolicy as _RejectPolicy,
   RequestRejectError as _RequestRejectError
 } from "./interceptor/debounce";
 import {DefaultExportType} from "./types/defaults";
-import betterAjax from "./common/betterAjax";
+import betterAjax, {Ajax, AjaxResponseTypes} from "./common/betterAjax";
 import {appendParam} from "./util/paramUtils";
 
 export type RequestRejectError = _RequestRejectError
@@ -23,39 +23,34 @@ export const applyDebounceInterceptor = (
   _applyDebounceInterceptor(axios, interceptorConfig)
 }
 
-interface Ajax {
-  <T> (url: string, param?: Record<string, string | number>, method?: Method): AxiosPromise<T>
-  <T> (axios: AxiosRequestConfig): AxiosPromise<T>
-}
-
 export const noRepeatAjax:Ajax =
-  <T> (p1: string | AxiosRequestConfig, p2?: Record<string, string | number>, p3?: Method):AxiosPromise<T> => {
+  <T, Clean = undefined> (p1: string | AxiosRequestConfig, p2?: Record<string, string | number>, p3?: Method): AjaxResponseTypes<T, Clean> => {
   if (typeof p1 === 'string') {
     return betterAjax<T>({
       url: p1,
       method: p3,
       param: p2,
-    })
+    }) as unknown as AjaxResponseTypes<T, Clean>
   } else {
-    return axios(p1)
+    return axios(p1) as unknown as AjaxResponseTypes<T, Clean>
   }
 }
 
 export const cancelOldAjax:Ajax =
-  <T> (p1: string | AxiosRequestConfig, p2?: Record<string, string | number>, p3?: Method):AxiosPromise<T> => {
+  <T, Clean = undefined> (p1: string | AxiosRequestConfig, p2?: Record<string, string | number>, p3?: Method): AjaxResponseTypes<T, Clean> => {
     if (typeof p1 === 'string') {
       return betterAjax<T>({
         url: p1,
         method: p3,
         param: p2,
         rejectPolicy: 'cancelOldTask'
-      })
+      }) as unknown as AjaxResponseTypes<T, Clean>
     } else {
-      // --
       p1.url = p1.url ? appendParam(p1.url, 'rejectPolicy', 'cancelOldAjax') : p1.url
-      return axios(p1)
+      return axios(p1) as unknown as AjaxResponseTypes<T, Clean>
     }
   }
+
 
 
 
