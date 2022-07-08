@@ -24,12 +24,12 @@ export const applyDebounceInterceptor = (
 }
 
 interface Ajax {
-  <T> (url: string, param?: Record<string, string>, method?: Method): AxiosPromise<T>
+  <T> (url: string, param?: Record<string, string | number>, method?: Method): AxiosPromise<T>
   <T> (axios: AxiosRequestConfig): AxiosPromise<T>
 }
 
 export const noRepeatAjax:Ajax =
-  <T> (p1: string | AxiosRequestConfig, p2?: Record<string, string>, p3?: Method):AxiosPromise<T> => {
+  <T> (p1: string | AxiosRequestConfig, p2?: Record<string, string | number>, p3?: Method):AxiosPromise<T> => {
   if (typeof p1 === 'string') {
     return betterAjax<T>({
       url: p1,
@@ -42,7 +42,7 @@ export const noRepeatAjax:Ajax =
 }
 
 export const cancelOldAjax:Ajax =
-  <T> (p1: string | AxiosRequestConfig, p2?: Record<string, string>, p3?: Method):AxiosPromise<T> => {
+  <T> (p1: string | AxiosRequestConfig, p2?: Record<string, string | number>, p3?: Method):AxiosPromise<T> => {
     if (typeof p1 === 'string') {
       return betterAjax<T>({
         url: p1,

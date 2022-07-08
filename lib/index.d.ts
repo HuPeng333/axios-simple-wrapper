@@ -11,7 +11,7 @@ export declare type RejectPolicy = _RejectPolicy;
  */
 export declare const applyDebounceInterceptor: (axios: AxiosStatic, interceptorConfig?: DebounceInterceptorConfig) => void;
 interface Ajax {
-    <T>(url: string, param?: Record<string, string>, method?: Method): AxiosPromise<T>;
+    <T>(url: string, param?: Record<string, string | number>, method?: Method): AxiosPromise<T>;
     <T>(axios: AxiosRequestConfig): AxiosPromise<T>;
 }
 export declare const noRepeatAjax: Ajax;
