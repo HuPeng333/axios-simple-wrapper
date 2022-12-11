@@ -8,7 +8,10 @@ export const parseObjToPostParam = (postParam?: Record<string, string | number>)
   }
   let params = ''
   Object.keys(postParam).forEach(key => {
-    params += (encodeURIComponent(key) + '=' + encodeURIComponent(postParam[key]) + '&')
+    const value = postParam[key]
+    if (value) {
+      params += (encodeURIComponent(key) + '=' + encodeURIComponent(postParam[key]) + '&')
+    }
   })
   // 替换最后一个多余的&符号
   const len = params.length
