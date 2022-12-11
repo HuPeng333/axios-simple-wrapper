@@ -125,9 +125,9 @@ import axios from "axios";
 type Person = {/*...*/}
 
 // 类型为: AxiosPromise<Person> 也可以理解为 Promise<AxiosResponse<Person>>
-axios.get<Person>('url')
+noRepeatAjax<Person>('url')
 
 // 类型为: Promise<Person>
-axios.get<Person, true>('url')
+noRepeatAjax<Person, true>('url')
 
 ```

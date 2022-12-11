@@ -51,7 +51,23 @@ export const cancelOldAjax:Ajax =
     }
   }
 
-
+/**
+ * 没有任何拦截策略的ajax请求
+ */
+export const normalAjax:Ajax =
+  <T, Clean = undefined> (p1: string | AxiosRequestConfig, p2?: Record<string, string | number>, p3?: Method): AjaxResponseTypes<T, Clean> => {
+    if (typeof p1 === 'string') {
+      return betterAjax<T>({
+        url: p1,
+        method: p3,
+        param: p2,
+        rejectPolicy: 'noPolicy'
+      }) as unknown as AjaxResponseTypes<T, Clean>
+    } else {
+      p1.url = p1.url ? appendParam(p1.url, 'rejectPolicy', 'noPolicy') : p1.url
+      return axios(p1) as unknown as AjaxResponseTypes<T, Clean>
+    }
+  }
 
 
 const defaultValue:DefaultExportType = {
