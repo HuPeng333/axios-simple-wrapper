@@ -38,10 +38,10 @@ axios.method('https://localhost#rejectPolicy=noPolicy')
 
 #### 可用配置:
 
-| 名称 | 类型 | 说明 |
-| :---: | :---: | :---: |
-| disableOnDevelopmentMode| boolean | 在开发模式下关闭拦截; 在React18+中, 生命周期函数(钩子)可能会被重复调用而造成请求重复 |
-| rejectErrorClass | RequestRejectError | 当使用'不允许重复的请求'策略时, 抛出的异常类型|
+|            名称            |         类型         |                         说明                          |
+|:------------------------:|:------------------:|:---------------------------------------------------:|
+| disableOnDevelopmentMode |      boolean       | 在开发模式下关闭拦截; 例如在React18+中, 生命周期函数(钩子)可能会被重复调用而造成请求重复 |
+|     rejectErrorClass     | RequestRejectError |              当使用'不允许重复的请求'策略时, 抛出的异常类型              |
 
 #### 判断任务是否被取消
 如果使用的是'不允许重复的请求'策略, 可以将请求`catch`的异常对象使用`instanceof`与`RequestRejectError`进行比较
@@ -84,11 +84,11 @@ import axios from 'axios'
 axiosWrapper.default.axios = axios
 applyDebounceInterceptor(axios)
 
-// 这种只支持GET和POST请求
+// 这种只支持GET和POST请求，对象会被自动解析为application/x-www-form-urlencoded格式
 noRepeatAjax('url', {msg: 'HelloWorld'}, 'POST')
 cancelOldAjax('url', {msg: 'HelloWorld'}, 'GET')
 
-// 若要使用其它方法可以将AxiosConfig直接传入
+// 若要使用其它方法可以将AxiosConfig直接传入(这里是直接将参数全丢给了Axios，请求数据需要自己处理，但拦截器仍然有效)
 noRepeatAjax({
   url: 'url',
   method: 'PUT'

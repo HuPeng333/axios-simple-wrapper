@@ -1,6 +1,6 @@
 {
   "name": "axios-simple-wrapper",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "provide various axios interceptors to help you to build your project",
   "main": "index.js",
   "scripts": {

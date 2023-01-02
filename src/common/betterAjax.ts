@@ -43,6 +43,7 @@ const betterAjax = <T> (config: AjaxConfig):AxiosPromise<T> => {
 
 export interface Ajax {
   <T, Clean = undefined > (url: string, param?: Record<string, string | number>, method?: Method): AjaxResponseTypes<T, Clean>
+  // <b>该重载将直接将所有参数丢给axios，需要自己进行数据处理，但是拦截器仍然会生效</b>
   <T, Clean = undefined> (axios: AxiosRequestConfig): AjaxResponseTypes<T, Clean>
 }
 export type AjaxResponseTypes<T, Clean> = true extends Clean ? Promise<T> : AxiosPromise<T>

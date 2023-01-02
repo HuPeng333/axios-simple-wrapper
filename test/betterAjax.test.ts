@@ -1,5 +1,5 @@
 import {getUrl, runAjaxPromise} from "./__mock/requestMock"
-import {applyDebounceInterceptor, cancelOldAjax, noRepeatAjax} from "../src"
+import wrapperStatic, {applyDebounceInterceptor, cancelOldAjax, noRepeatAjax} from "../src"
 import axiosWrapper from "../src/index"
 import axios, {AxiosError} from "axios";
 
@@ -26,4 +26,9 @@ test('Test request param', () => {
     const err = e as AxiosError
     expect(err.config.data).toBe(encodeURIComponent('page=1&size=10'))
   }
+})
+
+test('Test export default', () => {
+  // expect no error
+  wrapperStatic({url: 'https://www.baidu.com'})
 })

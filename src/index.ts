@@ -70,8 +70,8 @@ export const normalAjax:Ajax =
   }
 
 
-const defaultValue:DefaultExportType = {
-  default: {}
-}
+type WrapperStatic  = typeof betterAjax & DefaultExportType
 
-export default defaultValue
+let wrapperStatic: WrapperStatic = Object.assign(betterAjax, {default: {}})
+
+export default wrapperStatic
